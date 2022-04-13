@@ -1,2 +1,0 @@
-# ConsomiTounsi
-PI : Nous souhaitons développer une plateforme de gestion de produits 100% tunisiens. Le but est de gérer une boutique qui commercialise exclusivement des produits tunisiens, tout en assurant une bonne expérience utilisateur en facilitant l’accès aux produits ainsi que l’achat. En effet, l’utilisateur aura droit à une livraison à domicile ainsi qu’au service après-vente. Un espace caritatif est exactement fourni à travers la collecte de cagnottes ainsi que l’organisation d’évènements caritatifs.
