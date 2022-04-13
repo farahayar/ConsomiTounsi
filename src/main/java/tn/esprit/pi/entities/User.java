@@ -6,34 +6,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-class entityUser {
+public
+class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String mail;
-    private String login;
-    private String password;
-    private String gender;
-    private String fname;
-    private String lname;
-    private int phnum;
-    private String address; 
-    private int zipcode;
-    private String cin;
-    private String role;
-    private boolean banned;
-    
-    public entityUser() {
+    public int userid;
+    public String mail;
+    public String login;
+    public String password;
+    public String gender;
+    public String fname;
+    public String lname;
+    public int phnum;
+    public String address;
+    public int zipcode;
+    public String cin;
+    public String role;
+    public boolean banned;
+
+    public User() {
     }
 
     public int getId() {
-        return id;
+        return userid;
     }
 
     public void setId(int id) {
-        this.id = id;
-    } 
+        this.userid = id;
+    }
 
     public String getMail() {
         return this.mail;
