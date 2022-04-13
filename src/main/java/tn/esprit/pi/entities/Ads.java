@@ -1,5 +1,6 @@
 package tn.esprit.pi.entities;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -7,11 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,24 +28,26 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
-
-public class Products {
+public class Ads {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long idProd ;
-	String barCode  ;
-	String nameProd  ;
-	float unit_price_htva=0.00f;
-	String type;
-	final float tva = 0.2f;
+	Long idAds ;
+	String nameAds  ;
+	String channel  ;
+	@Temporal(TemporalType.DATE)
+	Date start_date;
+	@Temporal(TemporalType.DATE)
+	Date final_date;
+	int nb_initial_views;
+	int nb_final_views;
+	float cost;
+	String type_ads;
 	@ManyToOne
-	ProductCategory productCategory;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="products")
-	private Set<Ads> ads;
-	
-	
-	
-	
+	TargetMarket targetMarket;
+	@ManyToOne
+	Products products;
+	@ManyToOne
+	ProductCategory productCategory1;
 	
 
 }
