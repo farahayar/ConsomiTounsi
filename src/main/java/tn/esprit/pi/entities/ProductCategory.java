@@ -28,10 +28,9 @@ public class ProductCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int idCategoryProd;
-	int desc_CategoryProd;
+	int name_CategoryProd;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="productCategory")
 	private Set<Products> products;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="productCategory1")
-	private Set<Ads> ads;
+	
 
 }

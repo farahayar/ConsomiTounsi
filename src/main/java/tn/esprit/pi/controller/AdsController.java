@@ -23,19 +23,19 @@ public class AdsController {
 	IAdsService adsService;
 	
 	@GetMapping("/afficherAds")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	List<Ads> afficherAllAds(){
 		return adsService.retrieveAds();
 	}
 	
 	
 	@GetMapping("/afficherAd/{id}")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	Ads afficherAds(@PathVariable("idAds")Long idAds) {
 		return adsService.retrieveAdsById(idAds);
 	}
 	@GetMapping("/afficherAd")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	Ads afficherAds2(@RequestParam("idAds")Long idAds) {
 		return adsService.retrieveAdsById(idAds);
 	}
@@ -43,21 +43,21 @@ public class AdsController {
 	
 	@PostMapping("/ajouterAds")
 	@ResponseBody
-	Ads ajouterAds(@RequestBody Ads ad) { //yaani bch naadih fl body les info
+	Ads ajouterAds(@RequestBody Ads ad) { 
 		
 		return adsService.saveAds(ad);
 	}
 	
 	@PostMapping("/ajouterAds2")
 	@ResponseBody
-	Ads ajouterAds2(@RequestParam Ads ad) { //yaani bch naadih fl body les info
+	Ads ajouterAds2(@RequestParam Ads ad) { 
 		return adsService.saveAds(ad);
 	}
 	
 	
 	@PutMapping("/updateAds")
 	@ResponseBody
-	Ads updateAds(@RequestBody Ads ad) { //yaani bch naadih fl body les info nzid nes2el farah
+	Ads updateAds(@RequestBody Ads ad) { 
 		return adsService.updateAds(ad);
 	}
 	

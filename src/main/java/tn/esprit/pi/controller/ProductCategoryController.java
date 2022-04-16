@@ -24,19 +24,19 @@ public class ProductCategoryController {
 	IProductCategoryService productCategoryService;
 	
 	@GetMapping("/afficherAllPc")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	List<ProductCategory> afficherAllPc(){
 		return productCategoryService.retrieveProductCategory();
 	}
 	
 	
 	@GetMapping("/afficherPc/{id}")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	ProductCategory afficherPc(@PathVariable("idCategoryProd")Long idCategoryProd) {
 		return productCategoryService.retrieveProductCategoryById(idCategoryProd);
 	}
 	@GetMapping("/afficherPc")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	ProductCategory afficherPc2(@RequestParam("idCategoryProd")Long idCategoryProd) {
 			return productCategoryService.retrieveProductCategoryById(idCategoryProd);
 	}
@@ -44,21 +44,21 @@ public class ProductCategoryController {
 	
 	@PostMapping("/ajouterPc")
 	@ResponseBody
-	ProductCategory ajouterPc(@RequestBody ProductCategory pc) { //yaani bch naadih fl body les info
+	ProductCategory ajouterPc(@RequestBody ProductCategory pc) { 
 		
 		return productCategoryService.saveProductCategory(pc);
 	}
 	
 	@PostMapping("/ajouterPc2")
 	@ResponseBody
-	ProductCategory ajouterPc2(@RequestParam ProductCategory pc) { //yaani bch naadih fl body les info
+	ProductCategory ajouterPc2(@RequestParam ProductCategory pc) { 
 		return productCategoryService.saveProductCategory(pc);
 	}
 	
 	
 	@PutMapping("/updatePc")
 	@ResponseBody
-	ProductCategory updatePc(@RequestBody ProductCategory pc) { //yaani bch naadih fl body les info nzid nes2el farah
+	ProductCategory updatePc(@RequestBody ProductCategory pc) { 
 		return productCategoryService.updateProductCategory(pc);
 	}
 	

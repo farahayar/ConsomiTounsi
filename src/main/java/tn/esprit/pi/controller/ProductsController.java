@@ -26,19 +26,19 @@ public class ProductsController {
 	IProductsService productsService;
 	
 	@GetMapping("/afficherProducts")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	List<Products> afficherAllProducts(){
 		return productsService.retrieveProducts();
 	}
 	
 	
 	@GetMapping("/afficherProducts/{id}")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	Products afficherProducts(@PathVariable("idProd")Long idProd) {
 		return productsService.retrieveProductById(idProd);
 	}
 	@GetMapping("/afficherProduct")
-	@ResponseBody //pour afficher resultat
+	@ResponseBody 
 	Products afficherProducts2(@RequestParam("idProd")Long idProd) {
 			return productsService.retrieveProductById(idProd);
 	}
@@ -46,21 +46,21 @@ public class ProductsController {
 	
 	@PostMapping("/ajouterproduct")
 	@ResponseBody
-	Products ajouterProducts(@RequestBody Products p) { //yaani bch naadih fl body les info
+	Products ajouterProducts(@RequestBody Products p) { 
 		
 		return productsService.saveProduct(p);
 	}
 	
 	@PostMapping("/ajouterproduct2")
 	@ResponseBody
-	Products ajouterProducts2(@RequestParam Products p) { //yaani bch naadih fl body les info
+	Products ajouterProducts2(@RequestParam Products p) { 
 		return productsService.saveProduct(p);
 	}
 	
 	
 	@PutMapping("/updateproduct")
 	@ResponseBody
-	Products updateProducts(@RequestBody Products p) { //yaani bch naadih fl body les info nzid nes2el farah
+	Products updateProducts(@RequestBody Products p) { 
 		return productsService.updateProduct(p);
 	}
 	

@@ -42,12 +42,10 @@ public class Ads {
 	int nb_final_views;
 	float cost;
 	String type_ads;
-	@ManyToOne
-	TargetMarket targetMarket;
+	
 	@ManyToOne
 	Products products;
-	@ManyToOne
-	ProductCategory productCategory1;
+	
 	
 
 }

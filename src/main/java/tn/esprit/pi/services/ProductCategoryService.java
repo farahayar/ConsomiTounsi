@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.pi.entities.ProductCategory;
-import tn.esprit.pi.entities.TargetMarket;
+
 import tn.esprit.pi.repository.ProductCategoryRepository;
 @Service
 public class ProductCategoryService implements IProductCategoryService {
