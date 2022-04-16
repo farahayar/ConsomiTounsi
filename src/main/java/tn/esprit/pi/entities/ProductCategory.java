@@ -1,8 +1,4 @@
 package tn.esprit.pi.entities;
-
-<<<<<<< HEAD
-public class ProductCategory {
-=======
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,6 +16,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 
+
+
+
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -35,6 +35,5 @@ public class ProductCategory {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="productCategory")
 	private Set<Products> products;
 	
->>>>>>> cec7158ed91ee3d4ebae069aa02e395eadeb7340
 
 }

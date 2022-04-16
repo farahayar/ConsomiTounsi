@@ -3,10 +3,7 @@ package tn.esprit.pi.configurations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-<<<<<<< HEAD
-@Configuration
-public class SwaggerConfig {
-=======
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -38,6 +35,6 @@ public class SwaggerConfig {
 		}
 	
 
->>>>>>> cec7158ed91ee3d4ebae069aa02e395eadeb7340
 
-}
+
+

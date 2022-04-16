@@ -1,10 +1,8 @@
 package tn.esprit.pi.entities;
 
-<<<<<<< HEAD
-public class Ads {
-=======
+
+
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -50,6 +48,6 @@ public class Ads {
 	Products products;
 	
 	
->>>>>>> cec7158ed91ee3d4ebae069aa02e395eadeb7340
+
 
 }
