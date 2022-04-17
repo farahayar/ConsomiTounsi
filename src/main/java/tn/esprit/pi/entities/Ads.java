@@ -2,6 +2,7 @@ package tn.esprit.pi.entities;
 
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
-public class Ads {
+public class Ads implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long idAds ;

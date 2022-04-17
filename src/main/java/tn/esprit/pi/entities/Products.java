@@ -1,5 +1,6 @@
 package tn.esprit.pi.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,7 +29,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Entity
 
-public class Products {
+public class Products implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long idProd ;

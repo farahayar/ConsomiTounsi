@@ -1,4 +1,5 @@
 package tn.esprit.pi.entities;
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,11 +28,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
-public class ProductCategory {
+public class ProductCategory implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int idCategoryProd;
-	int name_CategoryProd;
+	Long idCategoryProd;
+	String name_CategoryProd;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="productCategory")
 	private Set<Products> products;
 	
