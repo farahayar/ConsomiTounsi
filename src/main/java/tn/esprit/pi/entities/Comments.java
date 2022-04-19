@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.apache.catalina.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +35,7 @@ public class Comments implements Serializable {
 	String comment;
 	
 	@ManyToOne(fetch= FetchType.LAZY)
-	public Userf user;
+	public User user;
 	
 	@ManyToOne(fetch= FetchType.LAZY)
 	public Problems problem;

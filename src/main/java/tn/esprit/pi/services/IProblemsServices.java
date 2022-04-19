@@ -3,7 +3,6 @@ package tn.esprit.pi.services;
 import java.util.List;
 
 import tn.esprit.pi.entities.Problems;
-import tn.esprit.pi.entities.Userf;
 
 
 public interface IProblemsServices {

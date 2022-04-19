@@ -13,8 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.apache.catalina.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -41,7 +39,7 @@ public class Problems  implements Serializable{
 	boolean closed;
 	
 	@ManyToOne(fetch= FetchType.LAZY)
-	public Userf user;
+	public User user;
 	
 	@ManyToMany(fetch= FetchType.LAZY)
 	public Set<Tags> tags;

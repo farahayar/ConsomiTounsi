@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import tn.esprit.pi.entities.Notifications;
 import tn.esprit.pi.repository.NotificationsRepository;
 import tn.esprit.pi.repository.ProblemsRepository;
-import tn.esprit.pi.repository.UserfRepository;
+import tn.esprit.pi.repository.UserRepository;
 
 @Service
 @Slf4j
@@ -21,7 +21,7 @@ public class NotificationsServices implements INotificationsServices{
 	NotificationsRepository notificationsRepository;
 	
 	@Autowired
-	UserfRepository userfRepository;
+	UserRepository userRepository;
 	@Autowired
 	ProblemsRepository problemsRepository;
 	
@@ -40,7 +40,7 @@ public class NotificationsServices implements INotificationsServices{
 	public Notifications save(Notifications t) {
 		Set<Notifications> ns= t.getUser().getNotifications();
 		ns.add(t);
-		userfRepository.save(t.getUser());
+		userRepository.save(t.getUser());
 		ns= t.getProblem().getNotifications();
 		ns.add(t);
 		problemsRepository.save(t.getProblem());

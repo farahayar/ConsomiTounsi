@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.apache.catalina.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -34,7 +32,7 @@ public class Approved implements Serializable{
 	boolean approved;
 	
 	@ManyToOne(fetch= FetchType.LAZY)
-	public Userf user;
+	public tn.esprit.pi.entities.User user;
 	
 	@ManyToOne(fetch= FetchType.LAZY)
 	public Problems problem;

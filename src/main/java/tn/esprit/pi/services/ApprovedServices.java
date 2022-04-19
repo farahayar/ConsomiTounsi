@@ -12,7 +12,7 @@ import tn.esprit.pi.entities.Approved;
 import tn.esprit.pi.entities.Comments;
 import tn.esprit.pi.repository.ApprovedRepository;
 import tn.esprit.pi.repository.ProblemsRepository;
-import tn.esprit.pi.repository.UserfRepository;
+import tn.esprit.pi.repository.UserRepository;
 
 @Service
 @Slf4j
@@ -24,7 +24,7 @@ public class ApprovedServices implements IApprovedServices{
 	
 
 	@Autowired
-	UserfRepository userfRepository;
+	UserRepository userRepository;
 	@Autowired
 	ProblemsRepository problemsRepository;
 	
@@ -42,7 +42,7 @@ public class ApprovedServices implements IApprovedServices{
 	public Approved save(Approved t) {
 		Set<Approved> cs= t.getUser().getApproveds();
 		cs.add(t);
-		userfRepository.save(t.getUser());
+		userRepository.save(t.getUser());
 		cs= t.getProblem().getApproveds();
 		cs.add(t);
 		problemsRepository.save(t.getProblem());

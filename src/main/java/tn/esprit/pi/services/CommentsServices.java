@@ -10,8 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import tn.esprit.pi.entities.Comments;
 import tn.esprit.pi.repository.CommentsRepository;
 import tn.esprit.pi.repository.ProblemsRepository;
-import tn.esprit.pi.repository.UserfRepository;
-
+import tn.esprit.pi.repository.UserRepository;
 @Service
 @Slf4j
 public class CommentsServices implements ICommentsServices{
@@ -21,7 +20,7 @@ public class CommentsServices implements ICommentsServices{
 	CommentsRepository commentsRepository;
 	
 	@Autowired
-	UserfRepository userfRepository;
+	UserRepository userRepository;
 	@Autowired
 	ProblemsRepository problemsRepository;
 	
@@ -39,7 +38,7 @@ public class CommentsServices implements ICommentsServices{
 	public Comments save(Comments t) {
 		Set<Comments> cs= t.getUser().getComments();
 		cs.add(t);
-		userfRepository.save(t.getUser());
+		userRepository.save(t.getUser());
 		cs= t.getProblem().getComments();
 		cs.add(t);
 		problemsRepository.save(t.getProblem());
