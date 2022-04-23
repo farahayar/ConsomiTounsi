@@ -1,6 +1,7 @@
 package tn.esprit.pi.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,11 @@ public class Chats implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	String msg;
+	Date date;
 	
 	@ManyToOne
-	public User user;
+	public User sender;
+	
+	@ManyToOne
+	public User reciver;
 }

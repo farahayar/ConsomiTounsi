@@ -53,8 +53,12 @@ public class User implements Serializable{
 	public Set<Problems> problems;
 	
     @JsonIgnore
-	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
-	public Set<Chats> chats;
+	@OneToMany(fetch= FetchType.EAGER,mappedBy = "sender" ,cascade = CascadeType.ALL)
+	public Set<Chats> chatsSender;
+    
+    @JsonIgnore
+	@OneToMany(fetch= FetchType.EAGER,mappedBy = "reciver" ,cascade = CascadeType.ALL)
+	public Set<Chats> chatsreciver;
 	
     @JsonIgnore
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)

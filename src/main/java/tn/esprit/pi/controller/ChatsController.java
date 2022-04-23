@@ -3,6 +3,8 @@ package tn.esprit.pi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,10 +22,19 @@ import tn.esprit.pi.services.IChatServices;
 
 @RestController 
 @RequestMapping("chatsController")
+@CrossOrigin(origins = "*")
 public class ChatsController {
 	
 	@Autowired
 	IChatServices chatServices;
+	
+	@Autowired
+	private SimpMessagingTemplate simpMessagingTemplate;
+
+	@PostMapping("/sendMessage")
+	private void sendNotif(@RequestBody Chats chat){
+		simpMessagingTemplate.convertAndSend("/chat/" + chat.getReciver().getUserid(), chat);
+	}
 	
 	@GetMapping("/afficherChats")
 	@ResponseBody 
