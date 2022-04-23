@@ -8,7 +8,7 @@ public interface IApprovedServices {
 
 	List<Approved> retrieveAll();
 	Approved retrieveById(Long id);
-	Approved save(Approved t);
+	Approved save(Approved t,Long idUser, Long idProb);
 	Approved update(Approved t);
 	void delete(Long id);
 }

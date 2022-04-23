@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -25,7 +27,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -38,6 +39,7 @@ public class Problems  implements Serializable{
 	String subject;
 	boolean closed;
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@ManyToOne(fetch= FetchType.LAZY)
 	public User user;
 	

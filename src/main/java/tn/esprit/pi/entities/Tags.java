@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -25,7 +27,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
+//@EqualsAndHashCode
 @Builder
 public class Tags implements Serializable {
 	@Id
@@ -33,6 +35,7 @@ public class Tags implements Serializable {
 	Long id;
 	String tag;
 	
+	@JsonIgnore	
 	@ManyToMany(fetch= FetchType.LAZY,mappedBy = "tags" ,cascade = CascadeType.ALL)
 	public Set<Problems> problems;
 	

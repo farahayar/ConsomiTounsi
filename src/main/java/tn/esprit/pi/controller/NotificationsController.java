@@ -39,10 +39,10 @@ public class NotificationsController {
 	return notificationsServices.retrieveById(id);
 	}
 	
-	@PostMapping("/ajouterNotification")
+	@PostMapping("/ajouterNotification/{idUser}/{idProb}")
 	@ResponseBody
-	Notifications ajouterNotification(@RequestBody Notifications p) {
-	return notificationsServices.save(p);
+	Notifications ajouterNotification(@RequestBody Notifications p,@PathVariable("idUser")Long idUser,@PathVariable("idProb")Long idProb) {
+	return notificationsServices.save(p,idUser,idProb);
 	}
 	
 	@PutMapping("/updateNotification")

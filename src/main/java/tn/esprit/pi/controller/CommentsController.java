@@ -39,10 +39,10 @@ public class CommentsController {
 	return commentsServices.retrieveById(id);
 	}
 	
-	@PostMapping("/ajouterComment")
+	@PostMapping("/ajouterComment/{idUser}/{on}")
 	@ResponseBody
-	Comments ajouterComment(@RequestBody Comments p) {
-	return commentsServices.save(p);
+	Comments ajouterComment(@RequestBody Comments c,@RequestParam("id") Long id,@PathVariable("on") String on,@PathVariable("idUser")Long idUser) {
+	return commentsServices.save(c, id, on,idUser);
 	}
 	
 	@PutMapping("/updateComment")

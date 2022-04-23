@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.pi.entities.Comments;
+import tn.esprit.pi.entities.Problems;
+import tn.esprit.pi.entities.Products;
+import tn.esprit.pi.entities.User;
 import tn.esprit.pi.repository.CommentsRepository;
 import tn.esprit.pi.repository.ProblemsRepository;
+import tn.esprit.pi.repository.ProductsRepository;
 import tn.esprit.pi.repository.UserRepository;
 @Service
 @Slf4j
@@ -24,6 +28,9 @@ public class CommentsServices implements ICommentsServices{
 	@Autowired
 	ProblemsRepository problemsRepository;
 	
+	@Autowired
+	ProductsRepository productsRepository; 
+	
 	@Override
 	public List<Comments> retrieveAll() {
 		return (List<Comments>)commentsRepository.findAll();
@@ -34,15 +41,26 @@ public class CommentsServices implements ICommentsServices{
 		return (Comments) commentsRepository.findById(id).orElse(null);
 	}
 
+	
 	@Override
-	public Comments save(Comments t) {
-		Set<Comments> cs= t.getUser().getComments();
-		cs.add(t);
-		userRepository.save(t.getUser());
-		cs= t.getProblem().getComments();
-		cs.add(t);
-		problemsRepository.save(t.getProblem());
-		
+	public Comments save(Comments t, Long id, String on,Long idUser) {
+		User u=userRepository.findById(idUser).orElse(null);
+		Object p;
+		if(on=="product"){
+			p= productsRepository.findById(id).orElse(null);
+			t.setProduct((Products)p);
+		}else{
+			p=problemsRepository.findById(id).orElse(null);
+			t.setProblem((Problems)p);
+		}
+		if (u== null) {
+			log.warn("user n'existe pas!");
+			return null;
+		}else if (p==null){
+			log.warn("sujet n'existe pas!");
+			return null;
+		}
+		t.setUser(u);
 		return (Comments)commentsRepository.save(t);
 	}
 

@@ -26,7 +26,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Entity
 
 public class Products implements Serializable{
@@ -42,6 +41,9 @@ public class Products implements Serializable{
 	ProductCategory productCategory;
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="products")
 	private Set<Ads> ads;
+	
+	@OneToMany(fetch= FetchType.EAGER,mappedBy = "product" ,cascade = CascadeType.ALL)
+	public Set<Comments> comments;
 	
 	
 	

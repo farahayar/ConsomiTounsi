@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -24,14 +26,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
+//@EqualsAndHashCode
 @Entity
 @Builder
 public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int userid;
+    public Long userid;
     public String mail;
     public String login;
     public String password;
@@ -46,18 +48,23 @@ public class User implements Serializable{
     public boolean banned;
 
   
+    @JsonIgnore
     @OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
 	public Set<Problems> problems;
 	
+    @JsonIgnore
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
 	public Set<Chats> chats;
 	
+    @JsonIgnore
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
 	public Set<Approved> Approveds;
 	
+    @JsonIgnore
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
 	public Set<Comments> comments;
 	
+    @JsonIgnore
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
 	public Set<Notifications> notifications;
 

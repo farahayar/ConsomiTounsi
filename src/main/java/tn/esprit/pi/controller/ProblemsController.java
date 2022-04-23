@@ -39,10 +39,10 @@ public class ProblemsController {
 	return problemsServices.retrieveById(id);
 	}
 	
-	@PostMapping("/ajouterProblem")
+	@PostMapping("/ajouterProblem/{iduser}")
 	@ResponseBody
-	Problems ajouterProblem(@RequestBody Problems p) {
-	return problemsServices.save(p);
+	Problems ajouterProblem(@RequestBody Problems p,@PathVariable("iduser")Long idUser) {
+	return problemsServices.save(p,idUser);
 	}
 	
 	@PutMapping("/updateProblem")

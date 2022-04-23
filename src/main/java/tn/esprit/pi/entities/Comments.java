@@ -24,7 +24,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Builder
 public class Comments implements Serializable {
 	
@@ -39,5 +38,8 @@ public class Comments implements Serializable {
 	
 	@ManyToOne(fetch= FetchType.LAZY)
 	public Problems problem;
+	
+	@ManyToOne(fetch= FetchType.LAZY)
+	public Products product;
 
 }

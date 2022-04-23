@@ -8,7 +8,7 @@ public interface ICommentsServices {
 	
 	List<Comments> retrieveAll();
 	Comments retrieveById(Long id);
-	Comments save(Comments t);
+	Comments save(Comments t,Long id, String on,Long idUser);
 	Comments update(Comments t);
 	void delete(Long id);
 

@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.pi.entities.Approved;
 import tn.esprit.pi.entities.Comments;
+import tn.esprit.pi.entities.Problems;
+import tn.esprit.pi.entities.User;
 import tn.esprit.pi.repository.ApprovedRepository;
 import tn.esprit.pi.repository.ProblemsRepository;
 import tn.esprit.pi.repository.UserRepository;
@@ -39,14 +41,18 @@ public class ApprovedServices implements IApprovedServices{
 	}
 
 	@Override
-	public Approved save(Approved t) {
-		Set<Approved> cs= t.getUser().getApproveds();
-		cs.add(t);
-		userRepository.save(t.getUser());
-		cs= t.getProblem().getApproveds();
-		cs.add(t);
-		problemsRepository.save(t.getProblem());
-		
+	public Approved save(Approved t,Long idUser, Long idProb) {
+		User u=userRepository.findById(idUser).orElse(null);
+		Problems p=problemsRepository.findById(idProb).orElse(null);
+		if (u== null) {
+			log.warn("user n'existe pas!");
+			return null;
+		}else if (p==null){
+			log.warn("sujet n'existe pas!");
+			return null;
+		}
+		t.setUser(u);
+		t.setProblem(p);
 		return (Approved)likesRepository.save(t);
 	}
 

@@ -39,10 +39,10 @@ public class ApprovedController {
 	return likesServices.retrieveById(id);
 	}
 	
-	@PostMapping("/ajouterlike")
+	@PostMapping("/ajouterlike/{idUser}/{idProb}")
 	@ResponseBody
-	Approved ajouterlike(@RequestBody Approved p) {
-	return likesServices.save(p);
+	Approved ajouterlike(@RequestBody Approved p,@PathVariable("idUser")Long idUser,@PathVariable("idProb")Long idProb) {
+	return likesServices.save(p,idUser,idProb);
 	}
 	
 	@PutMapping("/updatelike")
