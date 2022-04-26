@@ -1,51 +1,50 @@
 package tn.esprit.pi.entities;
 
-import java.sql.Date;
 
+import java.sql.Date;
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-class entityDelivery {
+@Table(name = "Deliveries")
+public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_delivery;
-    private int id_cmd;
-    private int id_deliveryp;
+    private Long id_delivery;
+    @Column(name="Delivery Person ID")
+    private Long id_deliveryp;
+    @Column(name="Status")
     private String statusd;
+    @Column(name="Cost")
     private int cost;
+    @Column(name="Region")
     private String region;
-    private int workload;
+    @Column(name="Vehicle")
     private String transport;
+    @Column(name="Date")
     private Date dated; 
     
-    public entityDelivery() {
+    public Delivery() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id_delivery;
     }
-
-    public void setId(int id_delivery) {
+    
+    
+    public void setId(Long id_delivery) {
         this.id_delivery = id_delivery;
     } 
 
-    public int getId_cmd() {
-        return this.id_cmd;
-    }
-
-    public void setId_cmd(int id_cmd) {
-        this.id_cmd = id_cmd;
-    }
-
-    public int getId_deliveryp() {
+    public Long getId_deliveryp() {
         return this.id_deliveryp;
     }
 
-    public void setId_deliveryp(int id_deliveryp) {
+    public void setId_deliveryp(Long id_deliveryp) {
         this.id_deliveryp = id_deliveryp;
     }
 
@@ -96,5 +95,7 @@ class entityDelivery {
     public void setDated(Date dated) {
         this.dated = dated;
     }
+
+
 
 }
