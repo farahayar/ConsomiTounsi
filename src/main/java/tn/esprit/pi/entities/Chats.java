@@ -1,6 +1,7 @@
 package tn.esprit.pi.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,8 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,34 +22,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Entity
+@EqualsAndHashCode
+@Builder
+public class Chats implements Serializable {
 
-public class Products implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long idProd ;
-	String barCode  ;
-	String nameProd  ;
-	float unit_price_htva=0.00f;
-	String type;
-	final float tva = 0.2f;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
+	String msg;
+	Date date;
+	
 	@ManyToOne
-	ProductCategory productCategory;
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="products")
-	private Set<Ads> ads;
+	public User sender;
 	
-	@OneToMany(fetch= FetchType.EAGER,mappedBy = "product" ,cascade = CascadeType.ALL)
-	public Set<Comments> comments;
-	
-	
-	
-	
-	
-
+	@ManyToOne
+	public User reciver;
 }
