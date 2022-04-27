@@ -71,15 +71,7 @@ public class Delivery {
     public void setRegion(String region) {
         this.region = region;
     }
-
-    public int getWorkload() {
-        return this.workload;
-    }
-
-    public void setWorkload(int workload) {
-        this.workload = workload;
-    }
-
+    
     public String getTransport() {
         return this.transport;
     }
