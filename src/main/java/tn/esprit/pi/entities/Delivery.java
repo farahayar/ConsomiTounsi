@@ -88,6 +88,9 @@ public class Delivery {
         this.dated = dated;
     }
 
-
+    @Override
+	public String toString() {
+		return "Delivery [id=" + id_delivery + ", id of delivery person=" + id_deliveryp + ", Status" + statusd + ", Cost=" + cost + "Address=" + region + "Vehicle=" + transport + "Date=" + dated];
+	}
 
 }

@@ -9,9 +9,20 @@ import tn.esprit.pi.entities.DeliveryPerson;
 @Service
 public class DeliveryPersonService implements IDeliveryPersonService{
     @Autowired
-	DeliveryPersonRepository deliverypersonRepository;
+	DeliveryPersonRepository deliveryPersonRepository;
 	
-	public DeliveryPerson addDelivery(DeliveryPerson dlp) {
-		return deliverypersonRepository.save(dlp);
+	@Override
+	public List<DeliveryPerson> retrieveAll() {
+		return (List<DeliveryPerson>)deliveryPersonRepository.findAll();
+	}
+
+	@Override
+	public DeliveryPerson retrieveById(Long idDeliveryPerson) {
+		return (DeliveryPerson) deliveryPersonRepository.findById(idDeliveryPerson).orElse(null);
+	}
+
+    @Override
+	public DeliveryPerson addDeliveryPerson(DeliveryPerson dlp) {
+		return deliveryPersonRepository.save(dlp);
 	}
 }
