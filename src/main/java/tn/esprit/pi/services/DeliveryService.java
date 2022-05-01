@@ -17,12 +17,24 @@ public class DeliveryService implements IDeliveryService{
 	}
 
 	@Override
-	public Delivery retrieveById(Long idDelivery) {
-		return (Delivery) deliveryRepository.findById(idDelivery).orElse(null);
+	public Delivery retrieveById(Long id_delivery) {
+		return (Delivery) deliveryRepository.findById(id_delivery).orElse(null);
 	}
 
     @Override
 	public Delivery addDelivery(Delivery dl) {
 		return deliveryRepository.save(dl);
 	}
+
+	@Override
+	public Delivery updateDelivery(Delivery dl) {
+		return deliveryRepository.save(dl);
+	}
+
+	@Override
+	public void deleteDelivery(Long id_delivery) {
+		deliveryRepository.deleteById(id_delivery);
+		
+	}
+
 }

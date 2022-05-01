@@ -8,6 +8,7 @@ import tn.esprit.pi.repository.DeliveryPersonRepository;
 import tn.esprit.pi.entities.DeliveryPerson;
 @Service
 public class DeliveryPersonService implements IDeliveryPersonService{
+	
     @Autowired
 	DeliveryPersonRepository deliveryPersonRepository;
 	
@@ -17,12 +18,23 @@ public class DeliveryPersonService implements IDeliveryPersonService{
 	}
 
 	@Override
-	public DeliveryPerson retrieveById(Long idDeliveryPerson) {
-		return (DeliveryPerson) deliveryPersonRepository.findById(idDeliveryPerson).orElse(null);
+	public DeliveryPerson retrieveById(Long id_deliveryp) {
+		return (DeliveryPerson) deliveryPersonRepository.findById(id_deliveryp).orElse(null);
 	}
 
     @Override
 	public DeliveryPerson addDeliveryPerson(DeliveryPerson dlp) {
 		return deliveryPersonRepository.save(dlp);
+	}
+
+	@Override
+	public DeliveryPerson updateDeliveryPerson(DeliveryPerson dlp) {
+		return deliveryPersonRepository.save(dlp);
+	}
+
+	@Override
+	public void deleteDeliveryPerson(Long id_deliveryp) {
+		deliveryPersonRepository.deleteById(id_deliveryp);
+		
 	}
 }

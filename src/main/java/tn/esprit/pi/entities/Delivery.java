@@ -16,14 +16,13 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_delivery;
     @Column(name="Delivery Person ID")
-    private Long id_deliveryp;
-    @Column(name="Status")
     private String statusd;
     @Column(name="Cost")
     private int cost;
     @Column(name="Region")
     private String region;
     @Column(name="Vehicle")
+    @Enumerated(EnumType.STRING)
     private String transport;
     @Column(name="Date")
     private Date dated; 
@@ -39,14 +38,6 @@ public class Delivery {
     public void setId(Long id_delivery) {
         this.id_delivery = id_delivery;
     } 
-
-    public Long getId_deliveryp() {
-        return this.id_deliveryp;
-    }
-
-    public void setId_deliveryp(Long id_deliveryp) {
-        this.id_deliveryp = id_deliveryp;
-    }
 
     public String getStatusd() {
         return this.statusd;
@@ -90,7 +81,7 @@ public class Delivery {
 
     @Override
 	public String toString() {
-		return "Delivery [id=" + id_delivery + ", id of delivery person=" + id_deliveryp + ", Status" + statusd + ", Cost=" + cost + "Address=" + region + "Vehicle=" + transport + "Date=" + dated];
+		return "Delivery [id=" + id_delivery + ", Status" + statusd + ", Cost=" + cost + "Address=" + region + "Vehicle=" + transport + "Date=" + dated;
 	}
 
 }
