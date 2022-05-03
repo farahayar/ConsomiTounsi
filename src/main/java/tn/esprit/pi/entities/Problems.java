@@ -1,6 +1,7 @@
 package tn.esprit.pi.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,15 +36,17 @@ public class Problems  implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	Long idProb;
-	
+	String title;
 	String subject;
+	Date date;
 	boolean closed;
 	
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@ManyToOne(fetch= FetchType.LAZY)
 	public User user;
 	
-	@ManyToMany(fetch= FetchType.LAZY)
+	
+	@ManyToMany(fetch= FetchType.EAGER)
 	public Set<Tags> tags;
 	
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "problem" ,cascade = CascadeType.ALL)

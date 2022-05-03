@@ -20,6 +20,17 @@ public class ChatsServices implements IChatServices{
 	public List<Chats> retrieveAll() {
 		return (List<Chats>) chatsRepository.findAll();
 	}
+	
+	@Override
+	public List<Chats> getMessageWithAdmin(long userid,long adminid) {
+		return (List<Chats>) chatsRepository.findMessageWithAdmin(userid,adminid);
+	}
+
+	
+	@Override
+	public List<Chats> getAdminListChat(long adminid) {
+		return (List<Chats>) chatsRepository.findAdminListChat(adminid);
+	}
 
 	@Override
 	public Chats retrieveById(Long id) {

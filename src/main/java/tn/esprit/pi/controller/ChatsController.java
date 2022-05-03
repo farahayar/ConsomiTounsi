@@ -1,8 +1,10 @@
 package tn.esprit.pi.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,12 +29,18 @@ public class ChatsController {
 	
 	@Autowired
 	IChatServices chatServices;
+	@Value("${admin.id}")
+	String adminId;
 	
 	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
 
 	@PostMapping("/sendMessage")
-	private void sendNotif(@RequestBody Chats chat){
+	private void chatWithAdmin(@RequestBody Chats chat){
+		if(chat.getReciver().userid==null)
+			chat.getReciver().setUserid(Long.valueOf(adminId));
+		chat.setDate(new Date());
+		chat=chatServices.save(chat);
 		simpMessagingTemplate.convertAndSend("/chat/" + chat.getReciver().getUserid(), chat);
 	}
 	
@@ -40,6 +48,18 @@ public class ChatsController {
 	@ResponseBody 
 	List<Chats> afficherChatss(){
 	return chatServices.retrieveAll();
+	}
+	
+	@GetMapping("/getMessageWithAdmin/{id}")
+	@ResponseBody 
+	List<Chats> getMessageWithAdmin(@PathVariable("id") Long userid){
+	return chatServices.getMessageWithAdmin(userid,Long.valueOf(adminId));
+	}
+
+	@GetMapping("/getAdminListChat")
+	@ResponseBody 
+	List<Chats> getAdminListChat(){
+	return chatServices.getAdminListChat(Long.valueOf(adminId));
 	}
 	
 	

@@ -35,7 +35,7 @@ public class Chats implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
-	String msg;
+	String message;
 	Date date;
 	
 	@ManyToOne

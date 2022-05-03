@@ -10,5 +10,9 @@ public interface IChatServices {
 	Chats save(Chats t);
 	Chats update(Chats t);
 	void delete(Long id);
+	
+
+	List<Chats> getMessageWithAdmin(long userid,long adminid);
+	List<Chats> getAdminListChat(long adminid);
 
 }
