@@ -1,6 +1,8 @@
 package tn.esprit.pi.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,8 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +24,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import tn.esprit.pi.entities.Bills;
+
 
 @Getter
 @Setter
@@ -29,9 +35,14 @@ import lombok.ToString;
 //@EqualsAndHashCode
 @Entity
 @Builder
+@Table(name = "users")
 public class User implements Serializable{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long userid;
     public String mail;
@@ -46,6 +57,14 @@ public class User implements Serializable{
     public String cin;
     public String role;
     public boolean banned;
+    
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Bills> bills;
+
+	public User() {
+		bills = new ArrayList<Bills>();
+	}
 
   
     @JsonIgnore
