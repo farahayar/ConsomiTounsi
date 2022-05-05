@@ -1,9 +1,12 @@
 package tn.esprit.pi.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public
@@ -18,6 +21,8 @@ class DeliveryPerson {
     private String regionp;
     private int bonus;
     
+    @ManyToMany
+	private Set<Delivery> Delivery;
     
     public DeliveryPerson() {
     }

@@ -17,8 +17,8 @@ import tn.esprit.pi.entities.DeliveryPerson;
 import tn.esprit.pi.services.IDeliveryPersonService;
 
 @RestController
-@RequestMapping("/resourceRootPath")
-class resourceNameController {
+@RequestMapping("/DeliveryPerson")
+class DeliveryPersonController {
 
     @Autowired
     IDeliveryPersonService deliveryPersonService;

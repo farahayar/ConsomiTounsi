@@ -2,6 +2,8 @@ package tn.esprit.pi.entities;
 
 
 import java.sql.Date;
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +25,17 @@ public class Delivery {
     private String region;
     @Column(name="Vehicle")
     @Enumerated(EnumType.STRING)
-    private String transport;
+    private transport transport;
     @Column(name="Date")
     private Date dated; 
     
+    @ManyToMany(mappedBy = "Delivery")
+	private Set<DeliveryPerson> DeliveryPerson;
+    @ManyToMany(mappedBy = "Delivery")
+    private Set<Products> Products;
+    @ManyToMany(mappedBy = "Delivery")
+    private Set<User> User;
+
     public Delivery() {
     }
 
@@ -38,7 +47,7 @@ public class Delivery {
     public void setId(Long id_delivery) {
         this.id_delivery = id_delivery;
     } 
-
+    
     public String getStatusd() {
         return this.statusd;
     }
@@ -63,11 +72,11 @@ public class Delivery {
         this.region = region;
     }
     
-    public String getTransport() {
+    public transport getTransport() {
         return this.transport;
     }
 
-    public void setTransport(String transport) {
+    public void setTransport(transport transport) {
         this.transport = transport;
     }
 

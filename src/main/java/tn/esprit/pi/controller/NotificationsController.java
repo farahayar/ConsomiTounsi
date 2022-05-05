@@ -1,4 +1,4 @@
-.package tn.esprit.pi.controller;
+package tn.esprit.pi.controller;
 
 import java.util.List;
 
