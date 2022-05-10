@@ -1,14 +1,12 @@
 package tn.esprit.pi.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 import tn.esprit.pi.entities.ItemBills;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,11 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tn.esprit.pi.entities.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,42 +38,23 @@ public class Bills implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Long id;
-		
-		private String description;
-		
-		private String observation;
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long idBill;
 
-		@Temporal(TemporalType.DATE)
-		@Column(name = "create_at")
-		private Date createAt;
+	    private float montantRemise;
+	    private float montantFacture;
 
-		@ManyToOne(fetch = FetchType.LAZY)
-		@JsonBackReference
-		private User user;
+	    @Temporal(TemporalType.DATE)
+	    private Date dateBill;
+	    private Boolean active;
 
-		@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-		@JoinColumn(name = "bills_id")
-		private List<ItemBills> items;
+	    @ManyToOne(fetch = FetchType.EAGER)
+	    @JoinColumn(name = "idUser")
+	    @JsonIgnoreProperties({"roles","factures"})
+	    private User user;
 
-		@PrePersist
-		public void prePersist() {
-			createAt = new Date();
-		}
-		
-		public Bills() {
-			this.items = new ArrayList<ItemBills>();
-		}
-		
-		public Double getTotal() {
-			Double total = 0.0;		
-			int size = items.size();
-			
-			for(int i = 0; i < size; i++) {
-				total += items.get(i).calculateImport();
-			}
-
-			return total;
-		}
+	    @OneToMany(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "idBill")
+	    @JsonIgnoreProperties({"bill"})
+	    private List<ItemBills> itemBills;
 }

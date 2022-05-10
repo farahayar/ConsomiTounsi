@@ -62,9 +62,9 @@ public class User implements Serializable{
 	@JsonManagedReference
 	private List<Bills> bills;
 
-	public User() {
-		bills = new ArrayList<Bills>();
-	}
+	//public User() {
+		//bills = new ArrayList<Bills>();
+	//}
 
   
     @JsonIgnore

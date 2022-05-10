@@ -23,123 +23,72 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+
+import com.tn.esprit.gestionstock.Controller.Api;
+import com.tn.esprit.gestionstock.Controller.ApiOperation;
+import com.tn.esprit.gestionstock.Controller.CrossOrigin;
+import com.tn.esprit.gestionstock.Controller.DeleteMapping;
+import com.tn.esprit.gestionstock.Controller.PutMapping;
+import com.tn.esprit.gestionstock.Controller.RequestBody;
+import com.tn.esprit.gestionstock.Controller.RestController;
+import tn.esprit.pi.controller.WebSocketController;
+import tn.esprit.pi.entities.WebSocketMessage;
 
 import tn.esprit.pi.entities.User;
 import tn.esprit.pi.entities.Bills;
 import tn.esprit.pi.entities.ItemBills;
 import tn.esprit.pi.entities.Products;
 import tn.esprit.pi.services.IBillsService;
+import tn.esprit.pi.services.BillsService;
 import tn.esprit.pi.services.UserService;
 
-@Secured("ROLE_ADMIN")
-@Controller
-@RequestMapping("/bills")
-@SessionAttributes("bills")
-public class BillsController {
+@RestController
+@CrossOrigin("*")
+@Api(tags = "Bill management")
+@RequestMapping("/bill/")
+public class BillsController  {
 
-	@Autowired
-	private IBillsService billsService;
-	
-	@Autowired
-	private MessageSource messageSource;
+    @Autowired
+    private BillsService billsService;
+    @Autowired
+    WebSocketController webSocketController;
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    @ApiOperation(value = "Add bill ")
+    @PostMapping("add")
+    public Bills add(@Valid @RequestBody Bills bills) {
+        Bills add = billsService.add(bills);
+        webSocketController.sendMessage(new WebSocketMessage("add bill"+bills.getIdBill()));
+        return add;
+    }
 
-	
-	/* ----- View Bills[id] ----- */
-	@GetMapping("/view/{id}")
-	public String view(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash, Locale locale) {
 
-		Bills bills = billsService.fetchBillsByIdWithUserWithBillsItemWithProduct(Long id);
-		
-		if (bills == null) {
-			flash.addAttribute("error", messageSource.getMessage("text.facture.flash.db.error", null, locale));
-			return "redirect:/list";
-		}
+    @ApiOperation(value = "Update bill ")
+    @PutMapping("update/{id}")
+    public Bills update(@Valid @RequestBody Bills bills,@PathVariable("id") Long id) {
+    	Bills update = billsService.update(bills, id);
+        webSocketController.sendMessage(new WebSocketMessage("update Bill"));
+        return update;
+    }
 
-		model.addAttribute("bills", bills);
-		model.addAttribute("title", String.format(messageSource.getMessage("text.facture.vers.titulo", null, locale), bills.getDescription()));
+    @ApiOperation(value = "Delete bill")
+    @DeleteMapping("delete/{id}")
+    public void delete(@PathVariable("id") long id) {
+        billsService.delete(id);
+        webSocketController.sendMessage(new WebSocketMessage("delete Bill"));
+    }
 
-		return "bills/view";
-	}
+    @ApiOperation(value = "Retreive all bills")
+    @GetMapping("list")
+    public List<Bills> findAll() {
+        return billsService.findAll();
+    }
 
-	/* ----- Create Invoice for Client[id] ----- */
-	@GetMapping("/form/{clientId}")
-	public String create(@PathVariable(value = "Userid") Long Userid, Map<String, Object> model,
-			RedirectAttributes flash, Locale locale) {
-
-		User user = userService.retrieveUserById(Userid);
-		
-		if (user == null) {
-			flash.addAttribute("error", messageSource.getMessage("text.cliente.flash.db.error", null, locale));
-			return "redirect:/list";
-		}
-
-		Bills bills = new Bills();
-		bills.setUser(user);
-
-		model.put("invoice", bills);
-		model.put("title", messageSource.getMessage("text.factura.form.titulo", null, locale));
-
-		return "bills/form";
-	}
-
-	/* ----- Autocomplete for Finding Products (autocomplete-products.js)----- */
-	@GetMapping(value = "/load-products/{term}", produces = { "application/json" })
-	public @ResponseBody List<Products> loadProducts(@PathVariable String term) {
-		return userService.findByName(term);
-	}
-
-	/* ----- Save Invoice ----- */
-	@PostMapping("/form")
-	public String save(@Valid Bills invoice, BindingResult result, Model model,
-			@RequestParam(name = "item_id[]", required = false) Long[] itemId,
-			@RequestParam(name = "amount[]", required = false) Integer[] amount, RedirectAttributes flash,
-			SessionStatus status, Locale locale) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("title", messageSource.getMessage("text.facture.form.titulo", null, locale));
-			return "invoice/form";
-		}
-
-		if (itemId == null || itemId.length == 0) {
-			model.addAttribute("title", messageSource.getMessage("text.factura.form.titulo", null, locale));
-			model.addAttribute("error", messageSource.getMessage("text.factura.flash.lineas.error", null, locale));
-			return "invoice/form";
-		}
-
-		for (int i = 0; i < itemId.length; i++) {
-			Products product = billsService.findProductById(itemId[i]);
-
-			ItemBills line = new ItemBills();
-			line.setAmount(amount[i]);
-			line.setProduct(product);
-			invoice.addItemBills(line);
-
-			log.info("ID: " + itemId[i].toString() + ", amount: " + amount[i].toString());
-		}
-
-		billsService.saveBills(bills);
-		status.setComplete();
-
-		flash.addFlashAttribute("success", messageSource.getMessage("text.factura.flash.crear.success", null, locale));
-
-		return "redirect:/view/" + invoice.getClient().getId();
-	}
-	
-	/* ----- Delete Invoice ----- */
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable(value = "id") Long id, RedirectAttributes flash, Locale locale) {
-		Bills bills = billsService.findBillsById(id);
-
-		if (bills != null) {
-			billsService.deleteBills(id);
-			flash.addAttribute("success", messageSource.getMessage("text.factura.flash.eliminar.success", null, locale));
-			return "redirect:/view/" + bills.getClient().getId();
-		}
-
-		flash.addFlashAttribute("error", messageSource.getMessage("text.factura.flash.db.error", null, locale));
-		return "redirect:/list/";
-	}
-
+    @ApiOperation(value = "Find bill by provided id")
+    @GetMapping("findById/{id}")
+    public Bills findById(@PathVariable("id") Long id) {
+        return billsService.findById(id);
+    }
 }
