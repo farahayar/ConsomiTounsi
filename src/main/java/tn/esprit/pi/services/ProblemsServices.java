@@ -2,7 +2,9 @@ package tn.esprit.pi.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -181,10 +183,24 @@ public class ProblemsServices implements IProblemsServices {
 
 		List<Problems> ps = problemsRepository.findByClosed(false);
 		for (Problems problems : ps) {
-			if(problems.comments.isEmpty() && problems.Approveds.isEmpty()){
+			if (problems.comments.isEmpty() && problems.Approveds.isEmpty()) {
 				problemsRepository.delete(problems);
 			}
 
 		}
+	}
+
+	@Override
+	public List<Problems> recently() {
+		// get current date
+		Date currentDate = Calendar.getInstance().getTime();
+		// get current date minus 1 year
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MONDAY, -1);
+		Date startDate = c.getTime();
+		return problemsRepository.findByDateBetween(startDate,currentDate);
 	}
 }

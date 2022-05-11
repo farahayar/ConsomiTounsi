@@ -15,5 +15,7 @@ public interface IProblemsServices {
 	Problems update(Problems p);
 	void delete(Long id);
 	Problems closeProblem(Long id);
+	List<Problems> recently();
+	
 
 }

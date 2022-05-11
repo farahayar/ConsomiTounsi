@@ -1,5 +1,6 @@
 package tn.esprit.pi.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,5 @@ import tn.esprit.pi.entities.Problems;
 public interface ProblemsRepository extends JpaRepository<Problems, Long>{
 
 	List<Problems> findByClosed(boolean b);
+	List<Problems> findByDateBetween(Date d1 , Date d2);
 }

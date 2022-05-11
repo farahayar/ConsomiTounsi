@@ -35,6 +35,12 @@ public class ProblemsController {
 	List<Problems> afficherProblems() {
 		return problemsServices.retrieveAll();
 	}
+	
+	@GetMapping("/recently")
+	@ResponseBody
+	List<Problems> recently() {
+		return problemsServices.recently();
+	}
 
 	@GetMapping("/afficherProblem/{id}")
 	@ResponseBody
