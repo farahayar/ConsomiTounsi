@@ -64,7 +64,7 @@ public class User implements Serializable{
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
 	public Set<Approved> Approveds;
 	
-    @JsonIgnore
+    
 	@OneToMany(fetch= FetchType.EAGER,mappedBy = "user" ,cascade = CascadeType.ALL)
 	public Set<Comments> comments;
 	

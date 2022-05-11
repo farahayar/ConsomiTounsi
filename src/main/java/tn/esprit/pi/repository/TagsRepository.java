@@ -9,4 +9,5 @@ import tn.esprit.pi.entities.Tags;
 @Repository
 public interface TagsRepository extends JpaRepository<Tags, Long>{
 
+	Tags findByTagLike(String tag);
 }
