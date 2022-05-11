@@ -8,4 +8,5 @@ import tn.esprit.pi.entities.Comments;
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, Long>{
 
+	Comments findByApprovedGreaterThan(int nb);
 }

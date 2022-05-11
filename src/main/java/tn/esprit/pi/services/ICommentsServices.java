@@ -11,5 +11,6 @@ public interface ICommentsServices {
 	Comments save(Comments t,Long id, String on,Long idUser);
 	Comments update(Comments t);
 	void delete(Long id);
+	List<Comments> addApprove(Long id);
 
 }

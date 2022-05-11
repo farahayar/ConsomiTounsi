@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,15 +28,22 @@ import lombok.ToString;
 @Builder
 public class Comments implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	boolean response;
 	String comment;
+	int approved;
 	
+	@JsonIgnore	
 	@ManyToOne(fetch= FetchType.LAZY)
 	public User user;
 	
+	@JsonIgnore	
 	@ManyToOne(fetch= FetchType.LAZY)
 	public Problems problem;
 	

@@ -3,6 +3,7 @@ package tn.esprit.pi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import tn.esprit.pi.services.ICommentsServices;
 
 @RestController 
 @RequestMapping("commentsController")
+@CrossOrigin(origins = "*")
 public class CommentsController {
 	
 	@Autowired
@@ -39,9 +41,9 @@ public class CommentsController {
 	return commentsServices.retrieveById(id);
 	}
 	
-	@PostMapping("/ajouterComment/{idUser}/{on}")
+	@PostMapping("/ajouterComment/{id}/{idUser}/{on}")
 	@ResponseBody
-	Comments ajouterComment(@RequestBody Comments c,@RequestParam("id") Long id,@PathVariable("on") String on,@PathVariable("idUser")Long idUser) {
+	Comments ajouterComment(@RequestBody Comments c,@PathVariable("id") Long id,@PathVariable("on") String on,@PathVariable("idUser")Long idUser) {
 	return commentsServices.save(c, id, on,idUser);
 	}
 	
@@ -55,5 +57,11 @@ public class CommentsController {
 	@ResponseBody
 	void supprimerComment(@PathVariable("id") Long id) {
 	commentsServices.delete(id);
+	}
+	
+	@GetMapping("/addApprove/{id}")
+	@ResponseBody
+	List<Comments> addApprove(@PathVariable("id") Long id) {
+	return commentsServices.addApprove(id);
 	}
 }
