@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -31,9 +33,11 @@ public class Approved implements Serializable{
 	Long id;
 	boolean approved;
 	
+	@JsonIgnore	
 	@ManyToOne(fetch= FetchType.LAZY)
 	public tn.esprit.pi.entities.User user;
 	
+	@JsonIgnore	
 	@ManyToOne(fetch= FetchType.LAZY)
 	public Problems problem;
 

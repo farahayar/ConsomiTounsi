@@ -41,7 +41,7 @@ public class ApprovedServices implements IApprovedServices{
 	}
 
 	@Override
-	public Approved save(Approved t,Long idUser, Long idProb) {
+	public Problems save(Approved t,Long idUser, Long idProb) {
 		User u=userRepository.findById(idUser).orElse(null);
 		Problems p=problemsRepository.findById(idProb).orElse(null);
 		if (u== null) {
@@ -53,7 +53,8 @@ public class ApprovedServices implements IApprovedServices{
 		}
 		t.setUser(u);
 		t.setProblem(p);
-		return (Approved)likesRepository.save(t);
+		likesRepository.save(t);
+		return p;
 	}
 
 	@Override
@@ -65,6 +66,13 @@ public class ApprovedServices implements IApprovedServices{
 	public void delete(Long id) {
 		likesRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public Problems unApprove(Long idUser, Long idProb) {
+		Problems p=problemsRepository.findById(idProb).orElse(null);
+		likesRepository.delete(likesRepository.findByUserAndProblem(userRepository.findById(idUser).orElse(null), p));
+		return p;
 	}
 	
 	

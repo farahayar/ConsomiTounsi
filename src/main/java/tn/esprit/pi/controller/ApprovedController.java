@@ -3,6 +3,7 @@ package tn.esprit.pi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.pi.entities.Approved;
+import tn.esprit.pi.entities.Problems;
 import tn.esprit.pi.services.IApprovedServices;
 
 
 
 @RestController 
 @RequestMapping("likesController")
+@CrossOrigin(origins = "*")
 public class ApprovedController {
 	
 	@Autowired
@@ -41,7 +44,7 @@ public class ApprovedController {
 	
 	@PostMapping("/ajouterlike/{idUser}/{idProb}")
 	@ResponseBody
-	Approved ajouterlike(@RequestBody Approved p,@PathVariable("idUser")Long idUser,@PathVariable("idProb")Long idProb) {
+	Problems ajouterlike(@RequestBody Approved p,@PathVariable("idUser")Long idUser,@PathVariable("idProb")Long idProb) {
 	return likesServices.save(p,idUser,idProb);
 	}
 	
@@ -55,5 +58,11 @@ public class ApprovedController {
 	@ResponseBody
 	void supprimerlike(@PathVariable("id") Long id) {
 	likesServices.delete(id);
+	}
+	
+	@GetMapping("/unApprove/{idUser}/{idProb}")
+	@ResponseBody
+	Problems unApprove(@PathVariable("idUser")Long idUser,@PathVariable("idProb")Long idProb) {
+	return likesServices.unApprove(idUser, idProb);
 	}
 }
