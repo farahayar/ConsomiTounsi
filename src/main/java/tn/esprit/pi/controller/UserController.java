@@ -39,7 +39,7 @@ public class UserController {
         return userService.saveUser(u);
     }
 
-    @PutMapping("/updatePc")
+    @PutMapping("/updatePc1")
     @ResponseBody
     User alterUser(@RequestBody User u) {
         return userService.updateUser(u);

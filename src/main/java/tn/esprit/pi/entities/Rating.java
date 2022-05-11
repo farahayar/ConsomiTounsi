@@ -1,24 +1,20 @@
 package tn.esprit.pi.entities;
 
-
-
-import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,26 +26,25 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Ads implements Serializable {
+public class Rating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long idAds ;
-	String nameAds  ;
-	String channel  ;
-	@Temporal(TemporalType.DATE)
-	Date start_date;
-	@Temporal(TemporalType.DATE)
-	Date final_date;
-	int nb_initial_views;
-	int nb_final_views;
-	float cost;
-	String type_ads;
+	Long idRating;
+	Integer star_number;
 	
 	@JsonIgnore
 	@ManyToOne
-	Products products;
+	Products productsrating;
 	
+	@JsonIgnore
+	@ManyToOne
+	User userrating;
 	
 
+	
+
+	
+	
+	
 
 }

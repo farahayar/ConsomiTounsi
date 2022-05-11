@@ -3,6 +3,7 @@ package tn.esprit.pi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ import tn.esprit.pi.entities.ProductCategory;
 import tn.esprit.pi.entities.Products;
 import tn.esprit.pi.services.IProductCategoryService;
 import tn.esprit.pi.services.IProductsService;
-
+@CrossOrigin(origins = "*")
 @RestController 
 public class ProductCategoryController {
 	@Autowired 
@@ -62,7 +63,7 @@ public class ProductCategoryController {
 		return productCategoryService.updateProductCategory(pc);
 	}
 	
-	@DeleteMapping("/deletePc/{id}")
+	@DeleteMapping("/deletePc/{idCategoryProd}")
 	@ResponseBody
 	void supprimerPc(@PathVariable("idCategoryProd") Long idCategoryProd) {
 		productCategoryService.deleteProductCategory(idCategoryProd);

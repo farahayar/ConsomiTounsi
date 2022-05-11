@@ -3,6 +3,7 @@ package tn.esprit.pi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.pi.entities.Ads;
 import tn.esprit.pi.entities.Products;
 import tn.esprit.pi.services.IAdsService;
-
+@CrossOrigin(origins = "*")
 @RestController 
 public class AdsController {
 	@Autowired
@@ -61,7 +62,7 @@ public class AdsController {
 		return adsService.updateAds(ad);
 	}
 	
-	@DeleteMapping("/deleteAds/{id}")
+	@DeleteMapping("/deleteAds/{idAds}")
 	@ResponseBody
 	void supprimerAds(@PathVariable("idAds") Long idAds) {
 		adsService.deleteAds(idAds);
