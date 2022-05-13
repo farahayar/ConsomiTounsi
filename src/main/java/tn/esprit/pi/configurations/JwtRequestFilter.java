@@ -1,4 +1,4 @@
-package pdt.esprit.consomitounsi.configurations;
+package tn.esprit.pi.configurations;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import pdt.esprit.consomitounsi.services.JwtUserDetailsService;
+import tn.esprit.pi.services.JwtUserDetailsService;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {

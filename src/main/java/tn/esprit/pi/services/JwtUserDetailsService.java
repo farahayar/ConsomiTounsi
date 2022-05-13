@@ -1,4 +1,4 @@
-package pdt.esprit.consomitounsi.services;
+package tn.esprit.pi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import pdt.esprit.consomitounsi.entities.User;
-import pdt.esprit.consomitounsi.model.UserDTO;
-import pdt.esprit.consomitounsi.repository.UserRepository;
+import tn.esprit.pi.entities.User;
+import tn.esprit.pi.model.UserDTO;
+import tn.esprit.pi.repository.UserRepository;
 
 import java.util.ArrayList;
 

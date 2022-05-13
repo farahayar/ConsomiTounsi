@@ -1,4 +1,4 @@
-package pdt.esprit.consomitounsi.model;
+package tn.esprit.pi.model;
 
 public class UserDTO {
     private String username;

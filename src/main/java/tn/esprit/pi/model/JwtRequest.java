@@ -1,4 +1,4 @@
-package pdt.esprit.consomitounsi.model;
+package tn.esprit.pi.model;
 
 import java.io.Serializable;
 

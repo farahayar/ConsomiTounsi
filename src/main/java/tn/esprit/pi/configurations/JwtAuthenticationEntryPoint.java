@@ -1,4 +1,4 @@
-package pdt.esprit.consomitounsi.configurations;
+package tn.esprit.pi.configurations;
 
 import java.io.IOException;
 import java.io.Serializable;
