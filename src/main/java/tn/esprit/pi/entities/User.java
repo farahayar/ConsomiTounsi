@@ -33,6 +33,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long userid;
+    public String username;
     public String mail;
     public String username;
     public String password;
