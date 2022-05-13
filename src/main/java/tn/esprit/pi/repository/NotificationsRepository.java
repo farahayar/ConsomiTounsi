@@ -3,10 +3,9 @@ package tn.esprit.pi.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
-import tn.esprit.pi.entities.User;
+import tn.esprit.pi.entities.Notifications;
 
 @Repository
-public interface UserRepository extends JpaRepository <User, Long> {
+public interface NotificationsRepository extends JpaRepository<Notifications, Long>{
 
 }

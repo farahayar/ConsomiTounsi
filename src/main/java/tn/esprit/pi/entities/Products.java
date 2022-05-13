@@ -26,13 +26,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
+@Entity
 public class Products implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -56,6 +56,8 @@ public class Products implements Serializable{
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="productsrating")
 	private Set<Rating> rating;
+	@OneToMany(fetch= FetchType.EAGER,mappedBy = "product" ,cascade = CascadeType.ALL)
+	public Set<Comments> comments;
 	
 	
 	
