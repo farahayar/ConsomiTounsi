@@ -1,4 +1,4 @@
-package tn.esprit.pi.configurations;
+package pdt.esprit.consomitounsi.configurations;
 
 import java.io.Serializable;
 import java.util.Date;
