@@ -75,7 +75,7 @@ public class CommentsServices implements ICommentsServices {
 
 	}
 
-	//@Scheduled(fixedRate = 60000)
+	@Scheduled(fixedRate = 60000)
 	public void closeProblemAfterfiftyComments() {
 		
 
