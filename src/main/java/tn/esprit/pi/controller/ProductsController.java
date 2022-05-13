@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import tn.esprit.pi.BatchLauncher;
 import tn.esprit.pi.entities.Products;
 import tn.esprit.pi.entities.Rating;
 import tn.esprit.pi.services.IProductCategoryService;
@@ -37,6 +38,8 @@ public class ProductsController {
 	IProductsService productsService;
 	@Autowired
 	IProductCategoryService productCategoryService;
+	@Autowired
+    private BatchLauncher batchLauncher;
 	
 	
 	
@@ -105,6 +108,15 @@ public class ProductsController {
 	void supprimerProduct2(@RequestParam("idProd") Long idProd) {
 		productsService.deleteProducts(idProd);
 	}
+	
+	/*Lancer le job d'ajout des lignes stocks à partir de la base de données
+	 * manuellement */
+	@PostMapping("/add-batch")
+	/*toDo11*/
+	public void perform() throws Exception {
+		batchLauncher.run();
+   }
+	
 	
 
 	
