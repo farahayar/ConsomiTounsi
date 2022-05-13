@@ -1,4 +1,4 @@
-package tn.esprit.pi;
+package tn.esprit.pi.configurations;
 
 import javax.servlet.ServletContext;
 

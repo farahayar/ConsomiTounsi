@@ -1,4 +1,4 @@
-package pdt.esprit.consomitounsi;
+package tn.esprit.pi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
